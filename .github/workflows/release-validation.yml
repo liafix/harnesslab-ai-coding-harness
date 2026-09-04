@@ -31,4 +31,10 @@ jobs:
         run: npm run validate
 
       - name: Runtime dependency security gate
-        run: npm audit --omit=dev --audit-level=high
+        run: |
+          for i in {1..5}; do
+            npm audit --omit=dev --audit-level=high && exit 0
+            echo "npm audit failed (attempt $i/5), retrying in 10 seconds..."
+            sleep 10
+          done
+          exit 1
