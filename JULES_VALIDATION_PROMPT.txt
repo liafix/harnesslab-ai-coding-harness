@@ -1,0 +1,41 @@
+Validate this HarnessLab Next.js candidate-demo repository for production release.
+
+Required work:
+1. Run `npm install` and generate/commit `package-lock.json`.
+2. Run `npm run validate` and fix only release-blocking dependency, configuration, TypeScript, ESLint, Vitest, or Next.js production-build issues.
+3. Run `npm audit --omit=dev --audit-level=high` and fix verified HIGH/CRITICAL runtime dependency vulnerabilities if any exist, without broad dependency churn.
+4. Re-run the full validation after every fix until all gates are green.
+5. Confirm the GitHub Actions `HarnessLab Release Validation` workflow is green.
+6. Open a PR containing only the minimum verified release-hardening changes.
+
+HARD FREEZE — DO NOT MODIFY:
+- Any file under `domain/`.
+- `presentation/candidate-story.ts` (the frozen 8-question Apertia mapping).
+- The state-machine sequence, release decisions, protected-contract policy, Context Pack semantics, patch-review semantics, production-readiness semantics, synthetic OpsCore scenario economics/metrics, or the golden path.
+- The candidate story meaning or the synthetic/no-proprietary-data credibility boundary.
+
+Expected frozen SHA-256 values are recorded in:
+- `PASS6_FROZEN_DOMAIN_SHA256.txt`
+- `PASS6_FROZEN_APERTIA_MAPPING_SHA256.txt`
+
+Before submitting the PR, run `npm run release:smoke` and verify those hashes still pass.
+
+Prefer fixes in package/dependency metadata, lockfile, ESLint/TypeScript/Vitest/Next config, CI configuration, generated Next type references, or other build-system surfaces.
+
+If a failing validation appears to require changing any frozen file or business/domain behavior, STOP and explain the blocker instead of changing it.
+
+Do not redesign the UI, add product scope, add live LLM/API dependencies, add a database/auth layer, or alter the 3–5 minute candidate-demo narrative.
+
+PR title recommendation:
+`chore(release): validate HarnessLab production build`
+
+In the PR body report exact results for:
+- release:smoke
+- validate:domain
+- lint
+- typecheck
+- Vitest test count
+- Next.js production build
+- runtime dependency audit
+- frozen domain hash check
+- frozen Apertia mapping hash check

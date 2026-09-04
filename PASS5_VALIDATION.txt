@@ -1,0 +1,44 @@
+HARNESSLAB PASS 5 VALIDATION
+============================
+
+[1] Release smoke
+
+> harnesslab-candidate-demo@0.1.0 release:smoke
+> node scripts/release-smoke.mjs
+
+RELEASE_SMOKE_PASS
+Frozen PASS 0–4 domain: PASS
+Engineering thesis: PASS
+Synthetic labeling: PASS
+Apertia credibility disclaimer: PASS
+Repository analysis engine: PASS
+Patch review + impact analysis: PASS
+Production release analysis: PASS
+Candidate engineering readout: PASS
+Eight-question Apertia mapping: PASS
+3–5 minute interview route: PASS
+Architecture ownership story: PASS
+
+[2] Domain + presentation TypeScript
+
+> harnesslab-candidate-demo@0.1.0 validate:domain
+> tsc -p tsconfig.domain.json
+
+DOMAIN_PRESENTATION_TYPECHECK_PASS
+
+[3] Frozen domain manifest verification
+FROZEN_DOMAIN_SHA256_PASS
+
+[4] Executable golden-path + candidate readout probe
+PASS5_RUNTIME_PROBE_PASS
+Golden path: BLOCKED → READY → READY_FOR_PRODUCTION
+Hiring mappings: 8/8
+Architecture steps: 10
+Interview route: 0:00 → 4:30
+Executive readout: {"repositoryContext":"5 / 42","contextReduction":"88%","aiIterations":2,"protectedContracts":3,"blockersCaught":2,"releaseStatus":"READY_FOR_PRODUCTION"}
+
+[5] All TypeScript/TSX syntax transpilation
+PASS5_ALL_TS_SYNTAX_PASS (25 files)
+
+[6] Dependency-backed install attempt
+npm install --no-audit --no-fund -> TIMEOUT in runner; node_modules/package-lock not produced.

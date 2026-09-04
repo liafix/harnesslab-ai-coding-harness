@@ -1,0 +1,45 @@
+RELEASE_SMOKE:
+
+> harnesslab-candidate-demo@0.6.0 release:smoke
+> node scripts/release-smoke.mjs
+
+RELEASE_SMOKE_PASS
+Frozen PASS 0–4 domain: PASS
+Frozen PASS 5 eight-question mapping: PASS
+Golden engineering thesis + synthetic boundary: PASS
+Repository/context + patch impact + production gate: PASS
+Candidate story + architecture ownership: PASS
+Guided-demo state-machine derivation: PASS
+Accessibility semantics + focus + reduced motion: PASS
+Responsive/release candidate UI markers: PASS
+Noindex + deterministic/no-live-LLM disclosure: PASS
+
+DOMAIN_TYPECHECK:
+
+> harnesslab-candidate-demo@0.6.0 validate:domain
+> tsc -p tsconfig.domain.json
+
+
+FROZEN_DOMAIN_SHA256:
+domain/context-pack.ts: OK
+domain/harness-engine.ts: OK
+domain/patch-review.ts: OK
+domain/production-readiness.ts: OK
+domain/release-gate.ts: OK
+domain/repository-analysis.ts: OK
+domain/state-machine.ts: OK
+domain/types.ts: OK
+
+FROZEN_APERTIA_MAPPING_SHA256:
+presentation/candidate-story.ts: OK
+
+RUNTIME_GOLDEN_PATH: PASS
+TASK_RECEIVED -> REPOSITORY_ANALYZED -> CONTEXT_READY -> PLAN_PROPOSED -> PLAN_APPROVED -> PATCH_GENERATED -> PATCH_REVIEWED -> PRECHECK_PASSED -> RELEASE_BLOCKED -> FIX_PROPOSED -> FIX_APPROVED -> REVALIDATED -> READY_FOR_PRODUCTION
+Final readout: 5 / 42 context · 88% reduction · 2 AI iterations · 3 protected contracts · 2 blockers caught · READY_FOR_PRODUCTION
+
+TS_TSX_SYNTAX_PROBE: PASS (28 files)
+SECRET_SCAN: PASS
+
+DEPENDENCY_BACKED_VALIDATE: PENDING
+Reason: npm registry install timed out; offline cache lacks @eslint/eslintrc metadata. No node_modules or package-lock.json was created.
+Required cloud command: npm install && npm run validate
