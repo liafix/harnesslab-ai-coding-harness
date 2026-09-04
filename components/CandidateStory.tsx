@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ProductNav } from "./ProductNav";
 import { ReleaseStrip } from "./ReleaseStrip";
 import { candidateStory, hiringQuestionMappings, interviewRoute } from "../presentation/candidate-story";
@@ -13,7 +14,7 @@ export function CandidateStory() {
           <h1>Candidate Story</h1>
           <p className="story-lead">{candidateStory.title}</p>
         </div>
-        <a className="button primary" href="/">Open Guided Demo</a>
+        <Link className="button primary" href="/">Open Guided Demo</Link>
       </header>
       <ProductNav active="candidate" />
       <ReleaseStrip />
@@ -63,7 +64,7 @@ export function CandidateStory() {
             <span className="label">3–5 minute interview route</span>
             <h2>One narrative, no feature-tour detours.</h2>
           </div>
-          <a className="button ghost" href="/">Start from Task</a>
+          <Link className="button ghost" href="/">Start from Task</Link>
         </div>
         <div className="interview-route">
           {interviewRoute.map((step) => (

@@ -22,13 +22,28 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '22.x'
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
 
       - name: Full release validation
         run: npm run validate
 
       - name: Runtime dependency security gate
-        run: npm audit --omit=dev --audit-level=high
+        run: |
+          for i in {1..5}; do
+            out=$(npm audit --omit=dev --audit-level=high 2>&1)
+            code=$?
+            echo "$out"
+            if [ $code -eq 0 ]; then
+              exit 0
+            fi
+            if echo "$out" | grep -iqE "Severity:\s*(high|critical)|vulnerabilities"; then
+              echo "HIGH/CRITICAL vulnerabilities detected in runtime dependencies!"
+              exit $code
+            fi
+            echo "npm audit registry transport failure (attempt $i/5), retrying in 5s..."
+            sleep 5
+          done
+          exit 1

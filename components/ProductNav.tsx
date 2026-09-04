@@ -1,5 +1,7 @@
 type ProductNavProps = { active: "demo" | "candidate" | "architecture" };
 
+import Link from "next/link";
+
 export function ProductNav({ active }: ProductNavProps) {
   const items = [
     { id: "demo" as const, label: "Live Harness", href: "/" },
@@ -9,14 +11,14 @@ export function ProductNav({ active }: ProductNavProps) {
   return (
     <nav className="product-nav" aria-label="HarnessLab sections">
       {items.map((item) => (
-        <a
+        <Link
           key={item.id}
           className={`product-nav-link ${active === item.id ? "active" : ""}`}
           href={item.href}
           aria-current={active === item.id ? "page" : undefined}
         >
           {item.label}
-        </a>
+        </Link>
       ))}
     </nav>
   );
