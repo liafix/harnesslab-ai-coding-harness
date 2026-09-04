@@ -19,14 +19,14 @@ const alternateTaskFiles: RepositoryFile[] = [
 
 const fillerModules = ["auth", "profiles", "analytics", "catalog", "reporting", "search", "billing-ui", "admin", "shared"];
 const filler: RepositoryFile[] = Array.from({ length: 31 }, (_, index) => {
-  const module = fillerModules[index % fillerModules.length];
+  const moduleName = fillerModules[index % fillerModules.length];
   return {
-    path: `modules/${module}/file-${String(index + 1).padStart(2, "0")}.ts`,
-    module,
+    path: `modules/${moduleName}/file-${String(index + 1).padStart(2, "0")}.ts`,
+    module: moduleName,
     language: "TypeScript",
     dependencies: [],
-    relevanceTags: [module],
-    contentExcerpt: `export const ${module.replace(/-/g, "_")}_${index + 1} = true;`,
+    relevanceTags: [moduleName],
+    contentExcerpt: `export const ${moduleName.replace(/-/g, "_")}_${index + 1} = true;`,
   };
 });
 

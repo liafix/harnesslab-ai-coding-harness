@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ProductNav } from "./ProductNav";
 import { ReleaseStrip } from "./ReleaseStrip";
 import { architectureSteps, candidateStory } from "../presentation/candidate-story";
@@ -19,7 +20,7 @@ export function ArchitectureStory() {
           <h1>AI inside a controlled engineering system</h1>
           <p className="story-lead">The model proposes. Context, contracts, validation and release ownership create the harness around it.</p>
         </div>
-        <a className="button primary" href="/candidate">See Role Mapping</a>
+        <Link className="button primary" href="/candidate">See Role Mapping</Link>
       </header>
       <ProductNav active="architecture" />
       <ReleaseStrip />
@@ -61,7 +62,7 @@ export function ArchitectureStory() {
           <span className="label">Release principle</span>
           <h2>Passing tests ≠ production-ready.</h2>
           <p>HarnessLab deliberately demonstrates a patch that passes pre-checks yet still fails domain invariants. A scoped fix is generated, but the complete release gate runs again before the human confirmation.</p>
-          <a className="inline-link" href="/#release-gate">Open Production Release Gate →</a>
+          <Link className="inline-link" href="/#release-gate">Open Production Release Gate →</Link>
         </article>
       </section>
 
