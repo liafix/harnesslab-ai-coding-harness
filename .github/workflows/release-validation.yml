@@ -22,12 +22,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '22.x'
 
-      - name: Update npm and install dependencies
-        run: |
-          npm install -g npm@latest
-          npm ci --no-audit --no-fund
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
 
       - name: Full release validation
         run: npm run validate
